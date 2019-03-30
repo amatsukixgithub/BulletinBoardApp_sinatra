@@ -1,0 +1,32 @@
+<% if @db_insert_message %>
+  <div><%= @db_insert_message %></div>
+<% end %>
+
+<form action="/bulletinboard/article_create" method="post">
+  <%# hidden属性のcsrfトークンを表示 %>
+  <%= csrf_tag %>
+
+  <h2>タイトル</h2>
+  <div>
+    <input type="text" name="title" />
+  </div>
+
+  <h2>本文</h2>
+  <div>
+    <input type="text" name="content" />
+  </div>
+
+  <h2>ユーザーID</h2>
+  </div>
+    <input type="number" name="user_id" />
+  </div>
+
+  <h2>記事ステータス</h2>
+  <div>
+    <input type="number" name="status" />
+  </div>
+
+  <div>
+    <input type="submit" value="Add Article" />
+  </div>
+</form>

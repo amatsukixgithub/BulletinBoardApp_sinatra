@@ -1,0 +1,11 @@
+<h1><%= @title_h1 %></h1>
+<ul>
+  <% @articles.each do |article| %>
+    <li data-id="<%= article.id %>" data-token="<%= csrf_token %>">
+      <a href="/bulletinboard/article/<%= article.id %>">
+        <%= h(article.title) %>
+      </a>
+        <span class="article_delete">[公開終了]</span>
+    </li>
+  <% end %>
+</ul>

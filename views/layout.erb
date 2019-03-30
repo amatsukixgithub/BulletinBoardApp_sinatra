@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <form class="Header_search" action="/bulletinboard/search" method="get">
+      <input class="Header_searchInput" placeholder="キーワードを入力" type="search" name="search_name" />
+    </form>
+    <a href="/bulletinboard/top">BulletinBoard</a>
+    <a href="/bulletinboard/article_new">Create Article</a>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
