@@ -9,6 +9,8 @@ drop table if exists personal_notices;
 create table users (
   id integer primary key AUTOINCREMENT,
   name text not null unique check (length(name) > 2),
+  password_hash not null,
+  password_salt not null,
   iconPath text,
   comment text,
   birth,
@@ -73,11 +75,11 @@ create table personal_notices (
   updated_at
 );
 
-insert into users ( name, comment, mail, authority )
-  values( 'first user', 'Nice to meet you!!', 'sample_sample@mail_sample', 1
+insert into users ( name, comment, mail, authority, password_hash, password_salt )
+  values( 'first user', 'Nice to meet you!!', 'sample_sample@mail_sample', 1, 'aa', 'aa'
 );
-insert into users (name, comment, mail )
-  values( 'second user', 'Nice to meet you!! 2nd user!','sample_sample2@mail_sample', 1
+insert into users (name, comment, mail, authority, password_hash, password_salt )
+  values( 'second user', 'Nice to meet you!! 2nd user!','sample_sample2@mail_sample', 1, 'aa', 'aa'
 );
 
 insert into articles( title, content, user_id, status )

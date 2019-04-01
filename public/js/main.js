@@ -17,7 +17,6 @@ $(function(){
 
   $('.comment_close').on('click',function(){
     var li = $(this).parent();
-    // console.table($(this).parent());
     if(!confirm('sure?')){
       return;
     }
@@ -30,4 +29,8 @@ $(function(){
       li.fadeOut(800);
     })
   })
+
+  // $('#article_new').on('click',function(){
+  //   alert('記事を登録しました');
+  // });
 });

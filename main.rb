@@ -4,16 +4,14 @@ Bundler.require
 # リロードでソースを更新
 require 'sinatra/reloader'
 
-# rubyとsqlを簡潔にするgem
-require 'active_record'
-
 ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3',
   database: './bba.db'
 )
 
 # logger用設定 STDOUT=>標準出力
-ActiveRecord::Base.logger = Logger.new(STDOUT)
+# ActiveRecord::Base.logger = Logger.new(STDOUT)
+ActiveRecord::Base.logger = Logger.new('sinatra.log')
 
 # CSRF対策　悪意のあるフォームからデータが送信されないようにする
 require 'rack/csrf'
@@ -48,19 +46,25 @@ end
 class Favorite < ActiveRecord::Base
 end
 
+configure do
+  # enable :sessions
+  use Rack::Session::Cookie
+end
+
 before do
   @title = 'BulletinBoard'
   @title_h1 = 'BulletinBoard App'
+  @session_user_id = session[:id]
 end
 
-# 記事一覧
+# 記事一覧画面
 get '/bulletinboard/top' do
   @title = 'Top|' + @title
   @articles = Article.all
   erb :top
 end
 
-# 記事詳細
+# 記事詳細画面
 get '/bulletinboard/article/*' do |id|
   @title = "Article #{id}|" + @title
   @article_detail = Article.find_by(id)
@@ -68,40 +72,80 @@ get '/bulletinboard/article/*' do |id|
   erb :article_detail
 end
 
-# 記事新規作成
+# 記事新規作成画面
 get '/bulletinboard/article_new' do
   @title = 'New|' + @title
   erb :article_new
 end
 
-# 記事登録
+# 記事新規作成処理
 post '/bulletinboard/article_create' do
-  Article.create(title: params[:title], content: params[:content], user_id: params[:user_id], status: params[:status])
+  Article.create(title: params[:title], content: params[:content], user_id: 1, status: 1)
   @db_insert_message = 'Articleを登録しました'
   redirect to('/bulletinboard/article_new')
 end
 
-# 記事削除
+# 記事削除処理
 post '/bulletinboard/article_destroy' do
   Article.find_by(params[:id]).destroy
 end
 
-# コメント削除
+# コメント登録処理
+post '/bulletinboard/comment_new' do
+  Comment.create(user_id: 1, article_id: params[:article_id], content: params[:content], status: 1)
+end
+
+# コメント削除処理
 post '/bulletinboard/comment_close' do
   Comment.update(params[:id], status: 0)
 end
 
-# 記事検索
+# 記事検索処理
 get '/bulletinboard/search/*' do
   # Article.where()
 end
 
-# ユーザー詳細
+# ユーザー登録画面
+get '/bulletinboard/user_new' do
+  @title = 'UserNew|' + @title
+  erb :user_new
+end
+
+# ログイン画面
+get '/bulletinboard/login' do
+  @title = 'UserLogin|' + @title
+  erb :user_login
+end
+
+# ログアウト処理
+post '/bulletinboard/logout' do
+  session.clear
+  redirect to('/bulletinboard/top')
+end
+
+# ユーザー登録
+post '/bulletinboard/user_create' do
+  password_salt = BCrypt::Engine.generate_salt
+  password_hash = BCrypt::Engine.hash_secret(params[:password], password_salt)
+  User.create(name: params[:name], password_hash: password_hash, password_salt: password_salt, comment: params[:comment], mail: params[:mail])
+
+  session_user = User.find_by(name: params[:name], password_hash: password_hash)
+  session[:user_id] = session_user.id
+  session[:user_name] = session_user.name
+  redirect to('/bulletinboard/top')
+end
+
+# ユーザー画面
 get '/bulletinboard/user/*' do
   # User.
 end
 
-# 記事一覧へ
+# 管理者画面
+get '/bulletinboard/regista' do
+  # erb :regista
+end
+
+# 記事一覧画面
 get '/bulletinboard*' do
   redirect to('/bulletinboard/top')
 end

@@ -11,8 +11,6 @@
     <li data-id="<%= comment.id %>" data-token="<%= csrf_token %>">
       <%= comment.user_id %>
       <span class="comment_close">[非公開]</span>
-    </li>
-    <li>
       <%= comment.content %>
     </li>
   <% end %>

@@ -11,6 +11,10 @@
     </form>
     <a href="/bulletinboard/top">BulletinBoard</a>
     <a href="/bulletinboard/article_new">Create Article</a>
+    <a href="/bulletinboard/user_new">New User</a>
+    <% if session[:user_id] %>
+    <%= session[:user_id] %>
+    <% end %>
     <div class="container">
       <%= yield %>
     </div>

@@ -1,0 +1,28 @@
+<form action="/bulletinboard/user_create" method="post">
+  <%# hidden属性のcsrfトークンを表示 %>
+  <%= csrf_tag %>
+
+  <h2>* 名前</h2>
+  <div>
+    <input type="text" name="name" />
+  </div>
+
+  <h2>* パスワード</h2>
+  <div>
+    <input type="password" name="password" />
+  </div>
+
+  <h2>コメント</h2>
+  <div>
+    <input type="text" name="comment" />
+  </div>
+
+  <h2>メールアドレス</h2>
+  <div>
+    <input type="text" name="mail" />
+  </div>
+
+  <div>
+    <input type="submit" value="Add User" />
+  </div>
+</form>
