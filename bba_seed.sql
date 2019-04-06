@@ -90,6 +90,31 @@ insert into articles( title, content, user_id, status )
   values( 'second title', 'second content', 2, 1
 );
 
+insert into articles( title, content, user_id, status )
+  values( '3 title', 'second content', 1, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '4 title', 'second content', 1, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '5 title', 'second content', 1, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '6 title', 'second content', 1, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '7 title', 'second content', 1, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '8 title', 'second content', 1, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '9 title', 'second content', 2, 1
+);
+insert into articles( title, content, user_id, status )
+  values( '10 title', 'second content', 2, 1
+);
+
 
 insert into comments ( user_id, article_id, content, status )
   values( 2, 1, '1st comment to 1st article by user2', 1

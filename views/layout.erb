@@ -10,11 +10,16 @@
       <input class="Header_searchInput" placeholder="キーワードを入力" type="search" name="search_name" />
     </form>
     <a href="/bulletinboard/top">BulletinBoard</a>
-    <a href="/bulletinboard/article_new">Create Article</a>
-    <a href="/bulletinboard/user_new">New User</a>
-    <% if session[:user_id] %>
-    <%= session[:user_id] %>
+    <%= h(session[:user_id]) %>
+    <% if session[:user_name] %>
+      <a href="/bulletinboard/article_new">Create Article</a>
+      <a><%= h(session[:user_name]) %></a>
+      <a href="/bulletinboard/user_logout">LogOut</a>
+    <% else %>
+      <a href="/bulletinboard/user_new">New User</a>
+      <a href="/bulletinboard/user_login">Login User</a>
     <% end %>
+
     <div class="container">
       <%= yield %>
     </div>

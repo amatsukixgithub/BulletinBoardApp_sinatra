@@ -1,0 +1,18 @@
+<form action="/bulletinboard/login" method="post">
+  <%# hidden属性のcsrfトークンを表示 %>
+  <%= csrf_tag %>
+
+  <h2>* mail</h2>
+  <div>
+    <input type="text" name="input_user_mail" />
+  </div>
+
+  <h2>* パスワード</h2>
+  <div>
+    <input type="password" name="input_user_password" />
+  </div>
+
+  <div>
+    <input type="submit" value="Login User" />
+  </div>
+</form>

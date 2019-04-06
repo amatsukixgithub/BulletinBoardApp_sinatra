@@ -1,17 +1,17 @@
 <h1><%= @title_h1 %></h1>
 <div>
-  <%= @article_detail.title %>
+  <%= h(@article_detail.title) %>
 </div>
 <div>
-  <%= @article_detail.content %>
+  <%= h(@article_detail.content) %>
 </div>
 
 <ul>
   <% @article_comments.each do |comment| %>
     <li data-id="<%= comment.id %>" data-token="<%= csrf_token %>">
-      <%= comment.user_id %>
+      <%= h(comment.user_id) %>
       <span class="comment_close">[非公開]</span>
-      <%= comment.content %>
+      <%= h(comment.content) %>
     </li>
   <% end %>
 </ul>
