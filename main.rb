@@ -9,8 +9,6 @@ ActiveRecord::Base.establish_connection(
   database: './bba.db'
 )
 
-# logger用設定 STDOUT=>標準出力
-# ActiveRecord::Base.logger = Logger.new(STDOUT)
 ActiveRecord::Base.logger = Logger.new('sinatra.log')
 
 # CSRF対策　悪意のあるフォームからデータが送信されないようにする
@@ -48,15 +46,6 @@ end
 
 class Favorite < ActiveRecord::Base
 end
-
-# configure do
-#   # enable :sessions
-#   use Rack::Session::Cookie
-#   set :session_secret, 'somethingverysecret1234'
-#   # use Rack::Session::Cookie,  :key => 'rack.session',
-#   #                             :expire_after => 60,
-#   #                             :secret => Digest::SHA256.hexdigest(rand.to_s)
-# end
 
 before do
   @title = 'BulletinBoard'
