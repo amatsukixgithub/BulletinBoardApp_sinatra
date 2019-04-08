@@ -26,7 +26,10 @@ $(function(){
       id: li.data('id'),
       _csrf: li.data('token')
     }, function(){
-      li.fadeOut(800);
+      li.fadeToggle(800,function(){
+        li.text('コメントは削除されました');
+      });
+      li.fadeToggle(800);
     })
   })
 

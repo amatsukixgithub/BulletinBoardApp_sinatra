@@ -43,6 +43,7 @@ class Article < ActiveRecord::Base
 end
 
 class Comment < ActiveRecord::Base
+  validates :content, presence: true
 end
 
 class Favorite < ActiveRecord::Base
@@ -74,7 +75,7 @@ end
 # 記事詳細画面
 get '/bulletinboard/article/*' do |id|
   @title = "Article #{id}|" + @title
-  @article_detail = Article.find_by(id)
+  @article_detail = Article.find(id)
   @article_comments = Comment.where('article_id = ?', id)
   erb :article_detail
 end
@@ -99,10 +100,11 @@ end
 
 # コメント登録処理
 post '/bulletinboard/comment_new' do
-  Comment.create(user_id: 1, article_id: params[:article_id], content: params[:content], status: 1)
+  Comment.create(user_id: session[:user_id], article_id: params[:article_id], content: params[:comment], status: 1)
+  redirect to("/bulletinboard/article/#{params[:article_id]}")
 end
 
-# コメント削除処理
+# コメント非公開処理
 post '/bulletinboard/comment_close' do
   Comment.update(params[:id], status: 0)
 end

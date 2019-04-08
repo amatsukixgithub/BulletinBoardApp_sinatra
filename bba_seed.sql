@@ -23,7 +23,7 @@ create table users (
 create table articles (
   id integer primary key AUTOINCREMENT,
   title text not null,
-  content text,
+  content text not null,
   user_id integer not null, -- 書き込んだユーザー
   status integer not null,  -- 0:非公開 1:公開
   created_at,
@@ -50,7 +50,9 @@ create table favorites (
 
 create table tags (
   id integer primary key,
+  article_id integer not null,
   name text not null,
+  -- article_id, name でユニークつけたい
   created_at,
   updated_at
 );
