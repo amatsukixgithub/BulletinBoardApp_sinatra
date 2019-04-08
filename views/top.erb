@@ -5,7 +5,9 @@
       <a href="/bulletinboard/article/<%= article.id %>">
         <%= h(article.title) %>
       </a>
-      <span class="article_delete">[公開終了]</span>
+      <% if article.user_id == session[:user_id] %>
+        <span class="article_delete">[公開終了]</span>
+      <% end %>
     </li>
   <% end %>
 </ul>
