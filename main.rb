@@ -148,11 +148,6 @@ end
 #   # Article.where()
 # end
 
-# # 管理者画面
-# get '/bulletinboard/regista' do
-#   # erb :regista
-# end
-
 # 記事一覧画面
 get '/bulletinboard*' do
   redirect to('/bulletinboard/top')
