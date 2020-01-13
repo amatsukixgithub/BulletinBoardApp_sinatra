@@ -4,8 +4,6 @@
 
 Qiitaライクな掲示板アプリ。
 
-練習で作成しているため、最低限な機能のみ実装。
-
 ## (機能一覧)
 
 記事一覧
@@ -20,14 +18,22 @@ Qiitaライクな掲示板アプリ。
 
 コメント表示／非表示
 
+会員登録
+
 ログイン管理
 
-## 課題　つけたい機能
+## 起動方法
 
-CSS編集
+githubからクローン
 
-人気の記事　
+```console
+git clone https://github.com/amatsukixgithub/BulletinBoardApp_sinatra.git
+```
 
-記事お気に入り
+main.rbのあるフォルダに移動して、実行
 
-記事編集
+```
+ruby main.rb
+```
+
+実行したら`http://localhost:4567/bulletinboard/top` にアクセス
